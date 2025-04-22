@@ -12,8 +12,8 @@
 - [DATA MODELLING](#data-MODELLING)
 - [ANALYSIS](#analysis)
 - [DASHBOARD LINK](#dashboard-link)
+- [RECOMMENDATIONS](#recommendation)
 - [CONCLUSION](#conclusion)
-- [RECOMMENDATION](#recommendation)
 
 ## INTRODUCTION
 Buam is a fast-growing regional retail-chain specializing in a diverse range of products, from
