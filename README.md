@@ -11,7 +11,6 @@
 - [DATA CLEANING/TRANSFORMATION](data-cleaning-/-transformation)
 - [DATA MODELLING](#data-MODELLING)
 - [ANALYSIS](#analysis)
-- [INSIGHTS](#insights)
 - [DASHBOARD LINK](#dashboard-link)
 - [CONCLUSION](#conclusion)
 - [RECOMMENDATION](#recommendation)
