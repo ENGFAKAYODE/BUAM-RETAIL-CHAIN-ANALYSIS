@@ -49,73 +49,43 @@ sources.
 The dashboard was built using four different tables and a calendar table that was created in
 power query, and each of these tables contains the following columns:
 
-**1. Fact Table**
-- CustomerID: Links each transaction to a specific customer to enable customer-based
-analysis.
-- ProductID: Identifies the product involved in the transaction for performance tracking.
-- SalesPersonID: Associates each transaction with a salesperson for performance
-evaluation.
-- Quantity Sold: Captures the number of units purchased in a single transaction.
-- Quantity returned: Captures the number of units returned in a single transaction.
-- OrderDate: Records the date the transaction took place to support time-based analysis.
+**1. Fact Table**  
+- **CustomerID**: Links each transaction to a specific customer to enable customer-based analysis.  
+- **ProductID**: Identifies the product involved in the transaction for performance tracking.  
+- **SalesPersonID**: Associates each transaction with a salesperson for performance evaluation.  
+- **Quantity Sold**: Captures the number of units purchased in a single transaction.  
+- **Quantity returned**: Captures the number of units returned in a single transaction.  
+- **OrderDate**: Records the date the transaction took place to support time-based analysis.  
 
-**2. Customers Table**
-- CustomerID: Acts as the unique identifier for each customer, linking customer data to
-transactions.
-- Full Name: Stores the customer’s full name for reporting and personalized engagement.
-- Customer Age: Facilitates segmentation and analysis of customers based on age groups.
-- Gender: Allows demographic studies and the creation of targeted marketing strategies.
-- Location: Provides the customer’s address or region for regional sales analysis.
+**2. Customers Table**  
+- **CustomerID**: Acts as the unique identifier for each customer, linking customer data to transactions.  
+- **Full Name**: Stores the customer’s full name for reporting and personalized engagement.  
+- **Customer Age**: Facilitates segmentation and analysis of customers based on age groups.  
+- **Gender**: Allows demographic studies and the creation of targeted marketing strategies.  
+- **Location**: Provides the customer’s address or region for regional sales analysis.  
 
-**3. Product Table**
-- ProductID: Uniquely identifies each product in the inventory.
-- ProductName: Represents the name of the product for easy reference and reporting.
-- Category: Groups products into categories for aggregated performance analysis.
-- Sales Price: Denotes the selling price of the product, used in revenue calculations.
-- Cost Price: Denotes the actual price of the product, used in profit calculations.
+**3. Product Table**  
+- **ProductID**: Uniquely identifies each product in the inventory.  
+- **ProductName**: Represents the name of the product for easy reference and reporting.  
+- **Category**: Groups products into categories for aggregated performance analysis.  
+- **Sales Price**: Denotes the selling price of the product, used in revenue calculations.  
+- **Cost Price**: Denotes the actual price of the product, used in profit calculations.  
 
-**4. Sales Person Table**
-- SalesPersonID: Acts as the unique identifier for each salesperson in the organization.
-- Full Name: Captures the salesperson’s name for tracking individual performance.
-- Store Name: the name of the store of the sales person
-- Date of Birth: date of birth of the sales person
+**4. Sales Person Table**  
+- **SalesPersonID**: Acts as the unique identifier for each salesperson in the organization.  
+- **Full Name**: Captures the salesperson’s name for tracking individual performance.  
+- **Store Name**: The name of the store of the salesperson.  
+- **Date of Birth**: Date of birth of the salesperson.  
 
-**5.Calendar Table Columns and Descriptions**
-- OrderDate: Represents the order date, formatted as YYYY-MM-DD, serving as the
-primary key for linking with fact tables.
-- Day: The day of the month (1–31), useful for analyzing daily trends or patterns.
-- DayName: The name of the day (e.g., Monday, Tuesday), helpful in identifying weekday
-vs. weekend trends.
-- Week: The week number of the year (1–52), allowing weekly aggregation of data.
-- WeekDayNumber: A numerical representation of the weekday (e.g., 1 for Monday, 7 for
-Sunday), useful for sorting or calculations.
-- MonthNumber: The month of the year (1–12), used for monthly trend analysis.
-- Month: The name of the month (e.g., January, February), providing clarity in
-visualizations and reports.
-- Quarter: The quarter of the year (1–4), enabling quarterly performance analysis.
-
-**DATA CLEANING/TRANSFORMATION:**
-
-1. Removing duplicates: There were no duplicates found in the tables. Ensuring there were
-no duplicates in the tables allowed getting accurate and reliable result from the analysis.
-2. Check for missing values: some columns were found to be completely empty in the fact
-table, these columns were removed as they were not needed for the analysis.
-3. Changed data types: All columns were ensured to be in the right data types. Incorrect data
-types were changed like the ‘Order date’ in the ‘Fact table’ where ‘change type with
-locale’ was used to convert the date format to mm/dd/yyyy because it was discovered that
-the date was in a dd/mm/yyyy format.
-4. Added custom column: the customer’s age was calculated by subtracting the date of birth
-from the today’s date, the column was then divide with 365 to get the age in terms of
-years. ‘Date of Birth’ column was later removed from the table as it wasn’t needed for the
-rest of the analysis.
-5. New table was created: the fact table was duplicated, all other columns apart from ‘order
-date’ were removed. Duplicates in the column were removed in order for a one-many
-relationship to be created when the calendar table is related with the fact table.
-From ‘order date’ column, month number, month name, quarter, week of year, day,
-weekday columns were extracted.
-6. Data accuracy and consistency: the data was ensured to be in uniformity across all rows.
-All these transformations were done in power query except for the ‘age group’ column that
-was created using measures in power pivot.
+**5. Calendar Table Columns and Descriptions**  
+- **OrderDate**: Represents the order date, formatted as YYYY-MM-DD, serving as the primary key for linking with fact tables.  
+- **Day**: The day of the month (1–31), useful for analyzing daily trends or patterns.  
+- **DayName**: The name of the day (e.g., Monday, Tuesday), helpful in identifying weekday vs. weekend trends.  
+- **Week**: The week number of the year (1–52), allowing weekly aggregation of data.  
+- **WeekDayNumber**: A numerical representation of the weekday (e.g., 1 for Monday, 7 for Sunday), useful for sorting or calculations.  
+- **MonthNumber**: The month of the year (1–12), used for monthly trend analysis.  
+- **Month**: The name of the month (e.g., January, February), providing clarity in visualizations and reports.  
+- **Quarter**: The quarter of the year (1–4), enabling quarterly performance analysis.
 
 ## DATA MODELLING
 A star schema was used for the modelling. The fact table which contained the observational data
@@ -128,29 +98,39 @@ was connected directly to 4 dimensional table forming a one-many cardinality
 
 
 ## ANALYSIS
+<p align="center">
+  <a href="">
+    <img src="https://github.com/user-attachments/assets/0e582efa-5f03-45c2-9ba3-48e1ef0b0e4d">
+  </a>
+
+**1. Key Performance Index (KPI):**
+
  <p align="center">
   <a href="">
     <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*zCTsX4suCA0z7ypF96wY7w.png">
   </a>
 
-**1.Key Performance Index (KPI):**
-
 This is a summary that gives a comprehensive view of the retail chain performance
-- Cost Of Goods Sold: $3.1M
+
+- **Cost Of Goods Sold: $3.1M**
+  
 This indicates the initial cost of purchasing all drinks and beverages that were sold in all
 the stores.
-- Total Revenue: $5.4M
+- **Total Revenue: $5.4M**
+  
 This KPI is reflects the total cash flows generated from retailing drinks and beverages
 across all the stores
-- Profit Margin: $2.3M
+- **Profit Margin: $2.3M**
+  
 This is the difference between Total Revenue and COGS, representing the gross profit
 from selling drinks and beverages.
-- Profit Margin: 42.2%
+- **Profit Margin: 42.2%**
+  
 This is the gross profit expressed as a percentage of total revenue. It indicates the portion
 of revenue retained as profit after covering direct costs. It a key indicator of profitablility.
 
 **2. CUSTOMER ANALYSIS**
- - Profit By Gender
+ - **Profit By Gender**
 <p align="center">
   <a href="">
     <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*o8jKfDvMq5RuqBc0AYrGIw.png">
@@ -162,7 +142,7 @@ The profit split between genders is almost equal, suggesting that both male and 
 customer groups significantly contribute to the company’s profitability.
 This slight difference might indicate product preferences of the female demography
 
-- Profit By Age Group
+- **Profit By Age Group**
  <p align="center">
   <a href="">
     <img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*_2kEaMdIvLPeDQOrjjAznw.png">
@@ -170,11 +150,11 @@ This slight difference might indicate product preferences of the female demograp
 
 This bar chart displays Profit by Customer Age, broken into four age ranges, along with the average customer age 45
 
-*21–60 Age Group Dominates Profit:*
+**21–60 Age Group Dominates Profit:**
 The majority of the profit comes from customers aged 21–40 ($815,857) and 41–60 ($869,426), which aligns with the average customer age of 45.
 These groups likely represent the most active and financially capable demographics.
 
-*Lower Contribution from 0–20 and 61–80 Groups:*
+**Lower Contribution from 0–20 and 61–80 Groups:**
 The 0–20 age group contributes the least profit ($77,465), which is expected due to limited purchasing power (e.g., students or dependents).
 The 61–80 age group contributes moderately ($534,763), possibly due to a focus on essentials, reduced spending on non-essential items.
 
@@ -182,7 +162,7 @@ The 61–80 age group contributes moderately ($534,763), possibly due to a focus
 **LOCATION**
 - Total Sales Location: *20*
 
-- Top-5 Profitable Locations
+- **Top-5 Profitable Locations**
  <p align="center">
   <a href="">
     <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*_w2uf17qkyU1nwl5gWokeQ.png">
@@ -199,10 +179,10 @@ This visual shows the best and least 5 profits by location, customers and sales 
 
 This visual tells the most valuable locations in terms of profit margin, helping to quickly identify the key locations driving the most of the retail chain.
 
-- Bottom-5 Profitable Locations
+- **Bottom-5 Profitable Locations**
    <p align="center">
   <a href="">
-    <img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*XUbLEeaCP0xPZJkWqyU-bg.png">
+    <img src="https://miro.medium.com/v2/resize:fit:786/format:webp/1*J3ErPopfyWJ1aRCFe5WWUA.png">
   </a>
 
 - The retail chain’s least profitable customers is in Travis Ewing with approx. less than $1k profit margin
@@ -211,13 +191,13 @@ This visual tells the most valuable locations in terms of profit margin, helping
 
 - Bobby Abbott, Christine Hawkins and Jeffery Powell complete the bottom-5 customers all less than $1k.
 
-**The insight from this chart points the need for better customer services and customer retention strategies.**
+         The insight from this chart points the need for better customer services and customer retention strategies.
 
 **SALES PERSON**
 
 - Total Sales Person - 10
 
-- Top-5 Profitable Sales Person
+- **Top-5 Profitable Sales Person**
    <p align="center">
   <a href="">
     <img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*Wlxo4BeN6pQNObtcLfhJtQ.png">
@@ -231,7 +211,7 @@ This visual tells the most valuable locations in terms of profit margin, helping
 
 This visual tells the most valuable Sales Person in terms of profit margin, an indicator to the key Sales Persons driving the most of the retail chain.
 
-- Bottom-5 Profitable Sales Person
+- **Bottom-5 Profitable Sales Person**
    <p align="center">
   <a href="">
     <img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*G539xO1y1SUhcs5GWSGHKQ.png">
@@ -242,7 +222,8 @@ This visual tells the most valuable Sales Person in terms of profit margin, an i
 - Kelsey Beard, Kimberly McDonald and Kelsey Zimmerman follow with decreasing sales figures.
 This performance probably indicates lack of product knowledge and offer sales techniques.
 
-**3. Time Frame Analysis**
+
+**3. TIME FRAME ANALYSIS**
 
 — Profit Trend and MOM growth rate
 
@@ -262,7 +243,7 @@ The labels represents the MOM growth rate.
 
 The fluctuation in profit margin indictate a need for further review marketing and sales strategies to detect the main cause of the cyclical pattern.
 
-- Profit By Weekdays
+- **Profit By Weekdays**
 
 The area chart details the profit generated across different weekdays. It shows a clear pattern of peak profit days and relatively consistent days.
  <p align="center">
@@ -283,7 +264,7 @@ This chart helps in understanding customer behavior.
 
 - Product Return Rate - 8.03%
 
-- Most Profitable Products
+- **Most Profitable Products**
 
 This visual shows the best performing products by Profit and Quantity. It gives users the flexiblility of toggling between the metrics highlighting the top products.
  <p align="center">
@@ -295,7 +276,7 @@ This visual shows the best performing products by Profit and Quantity. It gives 
 
 - Common Splash, Onto Dew, Eight Brew, and Attorney Mist follow closely behind, forming a group of consistently profitable products.
 
-**Top Selling Products**
+- **Top Selling Products**
  <p align="center">
   <a href="">
     <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*IVqJKeQFp_GMpwhtkmvF_w.png">
@@ -309,7 +290,7 @@ These top selling products indicates strong customer preference and behavior.
 
 It was also observed that the top selling products were also the most profitable products indicating strong correlation between quantity sold and profit made.
 
-- Profit By Product category
+- **Profit By Product category**
 
 The chart displays the profit generated by different product categories.
  <p align="center">
@@ -329,54 +310,41 @@ The chart displays the profit generated by different product categories.
 
 **RECOMMENDATIONS**
 
-1. Optimize Location Performance
-
-Analyze sales strategies in Washington and replicate successful tactics in underperforming locations like Missouri.
+**1. Optimize Location Performance:** Analyze sales strategies in Washington and replicate successful tactics in underperforming locations like Missouri.
 Offer location-specific promotions or events to boost foot traffic and engagement in underperforming regions.
 Conduct a detailed evaluation of inventory, customer preferences, and competition in the lower-performing areas.
 
-2. Address Product Return Rate (8.03%):
-The product return rate is relatively high. The following should be done to address that:
-
+**2. Address Product Return Rate (8.03%):** The product return rate is relatively high. The following should be done to address that:
 - An investigation of common reasons for returns by collecting customer feedback should be conducted.
 - Improvement of product descriptions, quality control, and customer service to reduce dissatisfaction.
 - A targeted satisfaction guarantee or product replacement program should be introduced.
 
-3. Leverage High-Performing Products
-The top 5 selling products (e.g., Begin Brew, Common Splash) are driving significant revenue. There is a need to:
-
+**3. Leverage High-Performing Products:** The top 5 selling products (e.g., Begin Brew, Common Splash) are driving significant revenue. There is a need to:
 - Expand inventory for these products in high-demand locations to avoid stockouts.
 - These high selling products indicate strong customer preference so there should be marketing campaigns through promotions, bundle offers, or loyalty programs.
 - Analyze customer demographics purchasing these items and tailor messaging to similar segments.
 
-4. Focus on Age Group Preferences:
-
-Customers aged 21–40 and 41–60 are the highest contributors to profit. Since we understand the customer age group most interested in our products, we can leverage this information to draw in new customers from these age brackets by:
+**4. Focus on Age Group Preferences:** Customers aged 21–40 and 41–60 are the highest contributors to profit. Since we understand the customer age group most interested in our products, we can leverage this information to draw in new customers from these age brackets by:
 
 - Creating age-targeted promotions, such as discounts or rewards programs tailored to these segments.
 - Expanding product offerings that cater to these age groups’ preferences and lifestyles.
 
-5. Refine Category-Level Strategies
+**5. Refine Category-Level Strategies**
 
-Soft drinks generated the highest profit, while categories like juice and alcoholic beverages are less profitable.
+- Soft drinks generated the highest profit, while categories like juice and alcoholic beverages are less profitable.
+- Expand marketing and inventory focus on soft drinks and other high-performing categories like sports drinks and tea.
+- For less profitable categories, evaluate inventory levels, pricing strategies, and customer demand to avoid overstocking and wastage.
 
-Expand marketing and inventory focus on soft drinks and other high-performing categories like sports drinks and tea.
-For less profitable categories, evaluate inventory levels, pricing strategies, and customer demand to avoid overstocking and wastage.
+**6. Improve Weekday Profitability:**
 
-6. Improve Weekday Profitability
+- Profitability varies by weekday, with Tuesday and Thursday performing better.
+- Implement targeted campaigns like “Weekend Specials” to attract customers on lower-performing days like Friday and Sunday.
+- Offer weekday-exclusive deals or discounts to encourage more purchases during slower weekdays.
 
-Profitability varies by weekday, with Tuesday and Thursday performing better.
-
-Implement targeted campaigns like “Weekend Specials” to attract customers on lower-performing days like Friday and Sunday.
-Offer weekday-exclusive deals or discounts to encourage more purchases during slower weekdays.
-
-7. Improve MoM Growth Consistency
-
-MoM growth shows fluctuations, with significant drops in certain months like September, July and December.
+**7. Improve MoM Growth Consistency:** MoM growth shows fluctuations, with significant drops in certain months like September, July and December.
 
 - Align campaigns and inventory management with seasonal trends to stabilize growth.
 - A further analysis can be done for these periods of decline to identify potential causes like seasonality using historical data, point out operational inefficiencies.
-
 
 **CONCLUSION**
 
