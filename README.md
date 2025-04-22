@@ -12,7 +12,7 @@
 - [DATA MODELLING](#data-MODELLING)
 - [ANALYSIS](#analysis)
 - [DASHBOARD LINK](#dashboard-link)
-- [RECOMMENDATIONS](#recommendation)
+- [RECOMMENDATIONS](#recommendations)
 - [CONCLUSION](#conclusion)
 
 ## INTRODUCTION
